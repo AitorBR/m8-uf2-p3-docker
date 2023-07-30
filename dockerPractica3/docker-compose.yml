@@ -1,0 +1,33 @@
+services: 
+    web: 
+        container_name: docker-php
+        image: php:8.0-apache
+        ports:
+        - "8080:80"
+        volumes:
+        - ./src:/var/www/html
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+    db:
+        container_name: db
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: PASSW_ROOT_MYSQL
+            MYSQL_DATABASE: BD_M08
+            MYSQL_USER: USUARI_MYSQL
+            MYSQL_PASSWORD: PASSW_MYSQL
+        ports:
+            - "9906:3306"
+            
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8081:80
+        environment:
+            - PMA_HOST=db
+        depends_on:
+            - db

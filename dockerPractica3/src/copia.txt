@@ -1,0 +1,18 @@
+<?php
+    // El servei que hem inclòs al docker-compose.yml.
+    $host = 'db';
+
+    // L'usuari de la BD's
+    $user = 'USUARI_MYSQL';
+
+    // El pwd de l'usuari de la BD's
+    $pass = 'PASSW_MYSQL';
+
+    // Comprovació de l'estat de la connexió a MySQL
+    $conn = new mysqli($host, $user, $pass);
+    if ($conn->connect_error) {
+        die("La connexió a fallat: " . $conn->connect_error);
+    } else {
+        echo "Connectats aL servidor MySQL correctament!";
+    }
+?>
